@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FixedCapacityStackOfStrings.h">
+    <ClInclude Include="workoncode.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
