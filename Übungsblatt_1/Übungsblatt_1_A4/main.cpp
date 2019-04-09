@@ -10,4 +10,6 @@ int main()
 	cout << " Bitte geben Sie die Zeichenkette ein!" << endl;
 
 	getline(cin, string1);
+
+	test
 }
