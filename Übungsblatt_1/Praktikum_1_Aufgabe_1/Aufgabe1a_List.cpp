@@ -69,6 +69,27 @@ void List::insertFront(int key)
 /*
 	Einen neuen Knoten mit dem Schlüsselwert key am Anfang der Liste einfügen
 */
+	Node* head = new Node;
+	head->key = key;
+	head->next = nullptr;
+	head->prev = nullptr;
+
+	if (head_tail->next == head_tail && head_tail->prev == head_tail)
+	{
+		head->next = head_tail;
+		head->prev = head_tail;
+		head_tail->next = head;
+		head_tail->prev = head;
+	}
+	else
+	{
+		Node* tmp = head_tail->next;
+		head->next = head_tail->next;
+		head_tail->next = head;
+		tmp->prev = head;
+		head->prev = head_tail;
+	}
+	list_size++;
 }
 
 void List::insertFront(List & _List)
@@ -103,27 +124,7 @@ void List::insertFront(List * _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an den Anfang der Liste (this) übertragen ohne sie zu kopieren!
 */
-	Node* head = new Node;
-	head->key = key;
-	head->next = nullptr;
-	head->prev = nullptr;
-
-	if (head_tail->next == head_tail && head_tail->prev == head_tail)
-	{
-		head->next = head_tail;
-		head->prev = head_tail;
-		head_tail->next = head;
-		head_tail->prev = head;
-	}
-	else
-	{
-		Node* tmp = head_tail->next;
-		head->next = head_tail->next;
-		head_tail->next = head;
-		tmp->prev = head;
-		head->prev = head_tail;
-	}
-	list_size++;
+	
 }
 
 void List::insertBack(int key)
