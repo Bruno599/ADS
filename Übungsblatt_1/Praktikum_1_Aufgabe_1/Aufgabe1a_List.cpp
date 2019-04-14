@@ -1,4 +1,4 @@
-#include "Aufgabe1a_List.h"
+ #include "Aufgabe1a_List.h"
 
 List::List()
 {
@@ -76,13 +76,19 @@ void List::insertFront(List & _List)
 	// Einfügen einer vorhandenen Liste am Anfang
 	/*	
 	Die einzufügenden Knoten werden übernommen (nicht kopiert)
-	Die einzufügende Liste _List ist anschließend leer.
-	Es darf keine Schleife und kein new benutzt werden. 
+	Die einzufügende Liste _List ist anschließend leer.  --> daher kann ich hier pop für die Liste verwenden
+	Es darf keine Schleife und kein new benutzt werden.	--> das bedeutet ich muss die pointer umlegen
 	*/
 /*
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an den Anfang der Liste (this) übertragen ohne sie zu kopieren!
 */
+	this->head_tail->next->prev = _List.head_tail->prev;
+	this->head_tail->next->prev->next = this->head_tail->next;
+	this->head_tail->next = _List.head_tail->next;
+	this->head_tail->next->prev = this->head_tail;
+	_List.head_tail->next = _List.head_tail;
+	_List.head_tail->prev = _List.head_tail;
 }
 
 void List::insertFront(List * _List)
@@ -97,6 +103,27 @@ void List::insertFront(List * _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an den Anfang der Liste (this) übertragen ohne sie zu kopieren!
 */
+	Node* head = new Node;
+	head->key = key;
+	head->next = nullptr;
+	head->prev = nullptr;
+
+	if (head_tail->next == head_tail && head_tail->prev == head_tail)
+	{
+		head->next = head_tail;
+		head->prev = head_tail;
+		head_tail->next = head;
+		head_tail->prev = head;
+	}
+	else
+	{
+		Node* tmp = head_tail->next;
+		head->next = head_tail->next;
+		head_tail->next = head;
+		tmp->prev = head;
+		head->prev = head_tail;
+	}
+	list_size++;
 }
 
 void List::insertBack(int key)
@@ -105,6 +132,27 @@ void List::insertBack(int key)
 /*
 	Einen neuen Knoten mit dem Schlüsselwert key am Ende der Liste einfügen
 */
+	Node* tail = new Node;
+	tail->key = key;
+	tail->next = nullptr;
+	tail->prev = nullptr;
+
+	if (head_tail->next == head_tail && head_tail->prev == head_tail)
+	{
+		tail->next = head_tail;
+		tail->prev = head_tail;
+		head_tail->next = tail;
+		head_tail->prev = tail;
+	}
+	else
+	{
+		Node* tmp = head_tail->prev;
+		tail->prev = head_tail->prev;
+		head_tail->prev = tail;
+		tmp->next = tail;
+		tail->next = head_tail;
+	}
+	list_size++;
 }
 
 void List::insertBack(List & _List)
@@ -119,6 +167,12 @@ void List::insertBack(List & _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an das Ende der Liste (this) angehangen ohne sie zu kopieren!
 */
+	this->head_tail->prev->next = _List.head_tail->next;
+	this->head_tail->prev->next->prev = this->head_tail->prev;
+	this->head_tail->prev = _List.head_tail->prev;
+	this->head_tail->prev->next = this->head_tail;
+	_List.head_tail->next = _List.head_tail;
+	_List.head_tail->prev = _List.head_tail;
 }
 
 void List::insertBack(List * _List)
@@ -144,6 +198,7 @@ bool List::getFront(int & key)
 	Der Wert des vorderen Schlüsselknotens wird rückgegeben und der Knoten gelöscht.
 	Die Methode del(key) darf nicht zum löschen benutzt werden.
 */
+	list_size--;
 	return false;
 }
 
@@ -155,6 +210,7 @@ bool List::getBack(int & key)
 	Der Wert des letzten Schlüsselknotens wird rückgegeben und der Knoten gelöscht.
 	Die Methode del(key) darf nicht zum löschen benutzt werden.
 */
+	list_size--;
 	return false;
 }
 
@@ -164,6 +220,7 @@ bool List::del(int key)
 /*
 	Löschen des Knotens mit dem Schlüssel key
 */
+	list_size--;
 	return false;
 }
 
