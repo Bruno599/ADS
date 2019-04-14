@@ -61,6 +61,7 @@ List::~List()
 /*
 	hier alle Knoten löschen, die im Objekt List allokiert wurden
 */
+
 }
 
 void List::insertFront(int key)
