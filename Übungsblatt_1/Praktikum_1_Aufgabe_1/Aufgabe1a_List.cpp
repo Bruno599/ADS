@@ -60,7 +60,19 @@ List::~List()
 	// Alle Knoten der Liste müssen gelöscht werden, wenn die Liste gelöscht wird.
 /*
 	hier alle Knoten löschen, die im Objekt List allokiert wurden
-*/
+	*/
+
+	Node *tmp = this->head_tail->next;
+	while(tmp !=  head_tail)
+	{
+		tmp = tmp->next;
+		delete tmp->prev;
+		list_size--;
+	}
+^54	//delete this->head_tail;
+	head_tail->next = head_tail;
+	head_tail->prev = head_tail;
+	delete tmp;
 
 }
 
@@ -200,8 +212,22 @@ bool List::getFront(int & key)
 	Der Wert des vorderen Schlüsselknotens wird rückgegeben und der Knoten gelöscht.
 	Die Methode del(key) darf nicht zum löschen benutzt werden.
 */
-	list_size--;
-	return false;
+	if (this->head_tail->next = head_tail)
+	{
+		return false;
+	}
+	else
+	{
+		Node* tmp = this->head_tail->next;
+		key = tmp->key;
+		this->head_tail->next = tmp->next;
+		tmp->next->prev = head_tail;
+
+		delete tmp;
+
+		list_size--;
+		return true;
+	}
 }
 
 bool List::getBack(int & key)
@@ -212,8 +238,22 @@ bool List::getBack(int & key)
 	Der Wert des letzten Schlüsselknotens wird rückgegeben und der Knoten gelöscht.
 	Die Methode del(key) darf nicht zum löschen benutzt werden.
 */
-	list_size--;
-	return false;
+	if (this->head_tail->prev = head_tail)
+	{
+		return false;
+	}
+	else
+	{
+		Node* tmp = this->head_tail->prev;
+		key = tmp->key;
+		this->head_tail->prev = tmp->prev;
+		tmp->prev->next = head_tail;
+
+		delete tmp;
+		
+		list_size--;
+		return true;
+	}
 }
 
 bool List::del(int key)
@@ -222,7 +262,23 @@ bool List::del(int key)
 /*
 	Löschen des Knotens mit dem Schlüssel key
 */
-	list_size--;
+	Node * tmp = this->head_tail->next;
+	while (tmp != head_tail)
+	{
+		if (tmp->key == key)
+		{
+			tmp->prev->next = tmp->next;
+			tmp->next->prev = tmp->prev;
+			delete tmp;
+			list_size--;
+			return true;
+		}
+
+		tmp = tmp->next;
+
+	}
+
+	//list_size--;
 	return false;
 }
 
@@ -232,8 +288,23 @@ bool List::search(int key)
 /*
 	suchen ob ein Knoten mit dem Schlüssel key existiert.
 */
+	Node * tmp = this->head_tail->next;
+	while (tmp != head_tail)
+	{
+		if (tmp->key == key)
+		{
+			return true;
+		}
+	
+		tmp = tmp->next;
+		
+	}
+
 	return false;
+	
 }
+
+
 
 bool List::swap(int key1, int key2)
 {
@@ -244,7 +315,38 @@ bool List::swap(int key1, int key2)
 	Es dürfen nicht nur einfach die Schlüssel in den Knoten getauscht werden!
 	Die Knoten sind in der Kette umzuhängen.
 */
-	return false;
+	Node * tmp = this->head_tail->next;
+	Node * tmp1 = nullptr;
+	Node * tmp2 = nullptr;
+	while (tmp != head_tail)
+	{
+		if (key1 == tmp->key)
+		{
+			tmp1 = tmp;
+		}
+		else if (key2 == tmp->key)
+		{
+			tmp2 = tmp;
+		}
+
+		tmp = tmp->next;
+	}
+	
+	tmp2->prev->next = tmp1;
+	tmp2->next->prev = tmp1;
+
+	tmp1->prev->next = tmp2;
+	tmp1->next->prev = tmp2;
+
+	tmp = tmp2;
+
+	tmp2->next = tmp1->next;
+	tmp2->prev = tmp1->prev;
+
+	tmp1->next = tmp->next;
+	tmp1->prev = tmp->prev;
+
+	return true;
 }
 
 int List::size(void)
@@ -253,7 +355,8 @@ int List::size(void)
 /*
 	Anzahl der Knoten in der Liste zurückgeben.
 */
-	return 0;
+	
+	return (list_size);
 }
 
 bool List::test(void)

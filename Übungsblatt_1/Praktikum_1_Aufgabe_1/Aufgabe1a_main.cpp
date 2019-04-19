@@ -6,6 +6,7 @@ using namespace std;
 
 int main(void)
 {
+	int result = Catch::Session().run();
 	int i;
 	List MyList;
 
