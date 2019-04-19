@@ -69,10 +69,10 @@ List::~List()
 		delete tmp->prev;
 		list_size--;
 	}
-^54	//delete this->head_tail;
+	//delete this->head_tail;
 	head_tail->next = head_tail;
 	head_tail->prev = head_tail;
-	delete tmp;
+	//delete tmp;
 
 }
 
@@ -123,6 +123,7 @@ void List::insertFront(List & _List)
 	this->head_tail->next->prev = this->head_tail;
 	_List.head_tail->next = _List.head_tail;
 	_List.head_tail->prev = _List.head_tail;
+	this->list_size = this->list_size + _List.list_size;
 }
 
 void List::insertFront(List * _List)
@@ -181,12 +182,14 @@ void List::insertBack(List & _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an das Ende der Liste (this) angehangen ohne sie zu kopieren!
 */
-	this->head_tail->prev->next = _List.head_tail->next;
-	this->head_tail->prev->next->prev = this->head_tail->prev;
-	this->head_tail->prev = _List.head_tail->prev;
-	this->head_tail->prev->next = this->head_tail;
-	_List.head_tail->next = _List.head_tail;
+	this->head_tail->prev->next = _List.head_tail->next;			//Letzter Knoten aus der aktuellen Liste wird genutzt und der next Pointer auf den ersten Knoten der _List gesetzt
+	this->head_tail->prev->next->prev = this->head_tail->prev;		//Der Erste angehängte Knoten der neuen _List wird im Prev Pointer auf den Letzten Knoten der aktuellen Liste umgesetzt.
+	this->head_tail->prev = _List.head_tail->prev;					//der Prev pointer von head_teil wird auf den letzten Knoten der angefügten Liste gesetzt.
+	//this->head_tail->prev->next = this->head_tail;					
+	_List.head_tail->prev->next = this->head_tail;					//im letzte Knoten der angefügten liste wir der next pointer auf head_teil der aktuellen Liste gesetzt.
+	_List.head_tail->next = _List.head_tail;						//headteil zeigt auf sich selbst.
 	_List.head_tail->prev = _List.head_tail;
+	this->list_size = this->list_size + _List.list_size;
 }
 
 void List::insertBack(List * _List)
@@ -331,21 +334,39 @@ bool List::swap(int key1, int key2)
 
 		tmp = tmp->next;
 	}
-	
+
+	if (tmp2->next == tmp1)
+	{
+		
+	}
+	//Node* tmp0 = new Node; //(tmp2->key, tmp2->next, tmp2->prev);
+	//tmp = tmp2->prev;
+	//tmp0->key= tmp2->key;
+	//tmp0->next = tmp2->next;
+	//tmp0->prev = tmp2->prev;
+
 	tmp2->prev->next = tmp1;
 	tmp2->next->prev = tmp1;
 
 	tmp1->prev->next = tmp2;
 	tmp1->next->prev = tmp2;
 
-	tmp = tmp2;
+	//tmp = tmp2;
 
+	tmp = tmp1->next;
+	tmp1->next = tmp2->next;
+	tmp2->next = tmp;
+
+	tmp = tmp1->prev;
+	tmp1->prev = tmp2->prev;
+	tmp2->prev = tmp;
+	/*
 	tmp2->next = tmp1->next;
 	tmp2->prev = tmp1->prev;
 
-	tmp1->next = tmp->next;
-	tmp1->prev = tmp->prev;
-
+	tmp1->next = tmp->next->next;
+	tmp1->prev = tmp->next->prev;
+	*/
 	return true;
 }
 

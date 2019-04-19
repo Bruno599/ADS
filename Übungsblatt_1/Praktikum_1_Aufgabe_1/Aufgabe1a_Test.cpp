@@ -4,8 +4,8 @@
 * Änderungen fürs Praktikum untersagt!
 *************************************************/
 #include "catch.hpp"
-#include "List.h"
-#include "Node.h"
+#include "Aufgabe1a_List.h"
+#include "Aufgabe1a_Node.h"
 #include <string>
 
 using namespace std;
