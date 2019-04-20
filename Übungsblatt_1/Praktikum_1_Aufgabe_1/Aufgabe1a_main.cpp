@@ -55,7 +55,7 @@ int main(void)
 
 	cout << MyList3;
 
-	List Mylist4;
+	/*List Mylist4;
 	Mylist4.insertFront(5);
 	Mylist4.insertFront(7);
 	Mylist4.insertFront(9);
@@ -72,7 +72,7 @@ int main(void)
 
 		cout << Mylist4;
 
-
+	*/
 	if (MyList3.test())
 		cout << "MyList3: Zeiger OK\n\n";
 	else

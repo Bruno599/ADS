@@ -215,7 +215,7 @@ bool List::getFront(int & key)
 	Der Wert des vorderen Schlüsselknotens wird rückgegeben und der Knoten gelöscht.
 	Die Methode del(key) darf nicht zum löschen benutzt werden.
 */
-	if (this->head_tail->next = head_tail)
+	if (this->head_tail->next == head_tail)
 	{
 		return false;
 	}
@@ -241,11 +241,12 @@ bool List::getBack(int & key)
 	Der Wert des letzten Schlüsselknotens wird rückgegeben und der Knoten gelöscht.
 	Die Methode del(key) darf nicht zum löschen benutzt werden.
 */
-	if (this->head_tail->prev = head_tail)
+	if (this->head_tail->next == this->head_tail)
 	{
 		return false;
 	}
 	else
+	
 	{
 		Node* tmp = this->head_tail->prev;
 		key = tmp->key;
@@ -304,9 +305,24 @@ bool List::search(int key)
 	}
 
 	return false;
-	
 }
 
+Node* List::search2(int key)
+{
+	Node * tmp = this->head_tail->next;
+	while (tmp != head_tail)
+	{
+		if (tmp->key == key)
+		{
+			return tmp;
+		}
+
+		tmp = tmp->next;
+
+	}
+
+	return false;
+}
 
 
 bool List::swap(int key1, int key2)
@@ -321,7 +337,7 @@ bool List::swap(int key1, int key2)
 	Node * tmp = this->head_tail->next;
 	Node * tmp1 = nullptr;
 	Node * tmp2 = nullptr;
-	while (tmp != head_tail)
+	/*while (tmp != head_tail)
 	{
 		if (key1 == tmp->key)
 		{
@@ -337,11 +353,15 @@ bool List::swap(int key1, int key2)
 		//
 
 		tmp = tmp->next;
-	}
+	}*/
 
-	if (tmp2->next == tmp1)
+	tmp1 = this->search2(key1);
+	tmp2 = this->search2(key2);
+
+
+	if (tmp1 == nullptr || tmp2 == nullptr) 
 	{
-		
+		return true;
 	}
 	//Node* tmp0 = new Node; //(tmp2->key, tmp2->next, tmp2->prev);
 	//tmp = tmp2->prev;
@@ -349,28 +369,53 @@ bool List::swap(int key1, int key2)
 	//tmp0->next = tmp2->next;
 	//tmp0->prev = tmp2->prev;
 
-	tmp2->prev->next = tmp1;
-	tmp2->next->prev = tmp1;
+	if (tmp1->next == tmp2)
+	{
+		tmp1->prev->next = tmp2;
+		tmp2->next->prev = tmp1;
+		
+		tmp2->prev = tmp1->prev;
+		tmp1->next = tmp2->next;
+		tmp2->next = tmp1;
+		tmp1->prev = tmp2;
+	}
+	else if (tmp2->next == tmp1)
+	{
+		tmp2->prev->next = tmp1;
+		tmp1->next->prev = tmp2;
 
-	tmp1->prev->next = tmp2;
-	tmp1->next->prev = tmp2;
+		tmp1->prev = tmp2->prev;
+		tmp1->next = tmp2->next;
+		tmp2->next = tmp1;
+		tmp1->prev = tmp2;
+	}
+	else
+	{
 
-	//tmp = tmp2;
+		tmp2->prev->next = tmp1;
+		tmp2->next->prev = tmp1;
 
-	tmp = tmp1->next;
-	tmp1->next = tmp2->next;
-	tmp2->next = tmp;
+		tmp1->prev->next = tmp2;
+		tmp1->next->prev = tmp2;
 
-	tmp = tmp1->prev;
-	tmp1->prev = tmp2->prev;
-	tmp2->prev = tmp;
-	/*
-	tmp2->next = tmp1->next;
-	tmp2->prev = tmp1->prev;
+		//tmp = tmp2;
 
-	tmp1->next = tmp->next->next;
-	tmp1->prev = tmp->next->prev;
-	*/
+		tmp = tmp1->next;
+		tmp1->next = tmp2->next;
+		tmp2->next = tmp;
+
+		tmp = tmp1->prev;
+		tmp1->prev = tmp2->prev;
+		tmp2->prev = tmp;
+	}
+		/*
+		tmp2->next = tmp1->next;
+		tmp2->prev = tmp1->prev;
+
+		tmp1->next = tmp->next->next;
+		tmp1->prev = tmp->next->prev;
+		*/
+	
 	return true;
 }
 

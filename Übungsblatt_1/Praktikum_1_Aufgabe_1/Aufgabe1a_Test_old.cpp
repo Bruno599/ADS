@@ -60,52 +60,14 @@ TEST_CASE("List Testing", "[List]") {
 
 		test_list.insertBack(second);
 
-		REQUIRE(test_list.size() == 8);		
-		
-		Node* tmp = get_anker(test_list);
-		tmp = tmp->next;
-		int key = tmp->key;
-		REQUIRE(key == 7);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 5);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 9);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 4);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 5);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 5);
-		
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 5);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 5);
-
-		for (int i = 0; i < 8; i++)
-			tmp = tmp->prev;
-
-		//head_tail wieder erreicht
-		key = tmp->key;
-		REQUIRE(key == 0);
+		REQUIRE(test_list.size() == 8);
+		REQUIRE(test_list.test() == true);
 	}
 
 	SECTION("Hinzufuegen von Nodes aus zweiter Liste am Anfang") {
 		test_list.insertFront(5);
 		test_list.insertFront(7);
+
 		test_list.insertBack(9);
 
 		second.insertFront(5);
@@ -119,18 +81,6 @@ TEST_CASE("List Testing", "[List]") {
 		Node* tmp = get_anker(test_list);
 		tmp = tmp->next;
 		int key = tmp->key;
-		REQUIRE(key == 5);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 5);
-
-		tmp = tmp->next;
-		key = tmp->key;
-		REQUIRE(key == 5);
-
-		tmp = tmp->next;
-		key = tmp->key;
 		REQUIRE(key == 7);
 
 		tmp = tmp->next;
@@ -140,6 +90,18 @@ TEST_CASE("List Testing", "[List]") {
 		tmp = tmp->next;
 		key = tmp->key;
 		REQUIRE(key == 9);
+
+		tmp = tmp->next;
+		key = tmp->key;
+		REQUIRE(key == 5);
+
+		tmp = tmp->next;
+		key = tmp->key;
+		REQUIRE(key == 5);
+
+		tmp = tmp->next;
+		key = tmp->key;
+		REQUIRE(key == 5);
 
 		for (int i = 0; i < 6; i++)
 			tmp = tmp->prev;
@@ -265,6 +227,7 @@ TEST_CASE("List Testing", "[List]") {
 		key = tmp->key;
 		REQUIRE(key == 2);
 		tmp = tmp->next;
+		cout << test_list;
 		//Prüfe ob Anker wieder erreichbar
 		for (int i = 0; i < 5; i++)
 			tmp = tmp->prev;

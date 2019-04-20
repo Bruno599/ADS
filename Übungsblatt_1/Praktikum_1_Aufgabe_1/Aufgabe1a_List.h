@@ -31,6 +31,7 @@ public:
 	bool getBack(int & key);				// Entnehmen eines Knoten am Ende
 	bool del(int key);						// löschen eines Knotens [key]
 	bool search(int key);					// Suchen eines Knoten
+	Node* search2(int key);					// Suchen eines Knoten & rükgabe der Adresse der Speicherstelle
 	bool swap(int key1, int key2);			// Knoten in der Liste vertauschen
 	int size(void);							// Größe der Lise (Anzahl der Knoten)
 	bool test(void);						// Überprüfen der Zeigerstruktur der Liste
