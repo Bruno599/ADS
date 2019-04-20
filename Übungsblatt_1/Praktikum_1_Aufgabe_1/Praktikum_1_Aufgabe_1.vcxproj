@@ -22,6 +22,7 @@
     <ClCompile Include="Aufgabe1a_List.cpp" />
     <ClCompile Include="Aufgabe1a_main.cpp" />
     <ClCompile Include="Aufgabe1a_Node.cpp" />
+    <ClCompile Include="Aufgabe1a_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aufgabe1a_List.h" />

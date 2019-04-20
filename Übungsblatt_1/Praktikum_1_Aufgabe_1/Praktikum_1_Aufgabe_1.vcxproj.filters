@@ -24,6 +24,9 @@
     <ClCompile Include="Aufgabe1a_main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Aufgabe1a_Test.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aufgabe1a_Node.h">
@@ -33,7 +36,7 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="catch.hpp">
-      <Filter>Ressourcendateien</Filter>
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

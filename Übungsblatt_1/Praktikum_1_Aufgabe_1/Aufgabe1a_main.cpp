@@ -55,6 +55,24 @@ int main(void)
 
 	cout << MyList3;
 
+	List Mylist4;
+	Mylist4.insertFront(5);
+	Mylist4.insertFront(7);
+	Mylist4.insertFront(9);
+	Mylist4.insertFront(4);
+
+	Mylist4.insertBack(3);
+	Mylist4.insertBack(2);
+	Mylist4.insertBack(4);
+	Mylist4.insertBack(1);
+
+	cout << Mylist4;
+
+		Mylist4.swap(4, 5);
+
+		cout << Mylist4;
+
+
 	if (MyList3.test())
 		cout << "MyList3: Zeiger OK\n\n";
 	else

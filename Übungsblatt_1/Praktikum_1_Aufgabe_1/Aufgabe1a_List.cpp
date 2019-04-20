@@ -331,6 +331,10 @@ bool List::swap(int key1, int key2)
 		{
 			tmp2 = tmp;
 		}
+		//else if (tmp1 != nullptr && tmp2 != nullptr)
+		//{
+		//	break;
+		//
 
 		tmp = tmp->next;
 	}
