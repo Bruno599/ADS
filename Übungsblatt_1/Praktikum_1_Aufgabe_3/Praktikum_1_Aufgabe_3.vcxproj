@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{149A74F3-B122-4536-87AE-3FB864492611}</ProjectGuid>
-    <RootNamespace>Praktikum1Aufgabe2</RootNamespace>
+    <ProjectGuid>{C5E2C44D-C6C3-4AD8-94BE-069A811D8093}</ProjectGuid>
+    <RootNamespace>Praktikum1Aufgabe3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,12 +115,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Aufgabe1a_main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Aufgabe1a_List.h" />
     <ClInclude Include="Aufgabe1a_Node.h" />
-    <ClInclude Include="catch.hpp" />
+    <ClInclude Include="Aufgabe1c_tweet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Aufgabe1c_main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

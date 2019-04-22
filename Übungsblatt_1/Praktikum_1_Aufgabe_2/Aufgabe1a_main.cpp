@@ -1,14 +1,16 @@
 #include <iostream>
-#define CATCH_CONFIG_RUNNER
-#include "catch.hpp"
+//#define CATCH_CONFIG_RUNNER
+//#include "catch.hpp"
 #include "Aufgabe1a_List.h"
+//#include "Aufgabe1a_Node.h"
 using namespace std;
+
 
 int main(void)
 {
-	int result = Catch::Session().run();
+	//int result = Catch::Session().run();
 	int i;
-	List MyList;
+	List<int> MyList;
 
 	for (i = 0; i < 10; i++) {
 		MyList.insertFront(i + 1);
@@ -24,8 +26,8 @@ int main(void)
 		cout << i << " ";
 	cout << endl << endl;
 
-	List MyList1, MyList2, MyList3;
-	List * MyList_dyn = new List;
+	List<int> MyList1, MyList2, MyList3;
+	List<int> * MyList_dyn = new List<int>;
 
 	for (i = 0; i < 10; i++) {
 		MyList1.insertFront(i + 1);

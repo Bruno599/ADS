@@ -15,19 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Aufgabe1a_main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Aufgabe1a_List.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Aufgabe1a_Node.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="catch.hpp">
-      <Filter>Ressourcendateien</Filter>
+    <ClInclude Include="Aufgabe1c_tweet.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Aufgabe1c_main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

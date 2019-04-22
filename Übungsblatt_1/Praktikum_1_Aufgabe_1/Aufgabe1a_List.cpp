@@ -1,4 +1,4 @@
- #include "Aufgabe1a_List.h"
+ //#include "Aufgabe1a_List.h"
 
 List::List()
 {
