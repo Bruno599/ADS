@@ -1,4 +1,4 @@
- //#include "Aufgabe1a_List.h"
+#include "Aufgabe1a_List.h"
 
 List::List()
 {
@@ -61,19 +61,27 @@ List::~List()
 /*
 	hier alle Knoten löschen, die im Objekt List allokiert wurden
 	*/
-
-	Node *tmp = this->head_tail->next;
-	while(tmp !=  head_tail)
+	if (this->head_tail->next == head_tail)
 	{
-		tmp = tmp->next;
-		delete tmp->prev;
-		list_size--;
+		//std::cout << "Liste ist schon geloescht" << std::endl;
+		delete head_tail;
+		head_tail = nullptr;
 	}
-	//delete this->head_tail;
-	head_tail->next = head_tail;
-	head_tail->prev = head_tail;
-	//delete tmp;
-
+	else
+	{
+		Node *tmp = this->head_tail->next;
+		while (tmp != head_tail)
+		{
+			tmp = tmp->next;
+			delete tmp->prev;
+			list_size--;
+		}
+		//delete this->head_tail;
+		head_tail->next = head_tail;
+		head_tail->prev = head_tail;
+		delete head_tail;
+		head_tail = nullptr;
+	}
 }
 
 void List::insertFront(int key)
@@ -117,6 +125,11 @@ void List::insertFront(List & _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an den Anfang der Liste (this) übertragen ohne sie zu kopieren!
 */
+	if (_List.head_tail->next == _List.head_tail)
+	{
+		return;
+	};
+
 	this->head_tail->next->prev = _List.head_tail->prev;
 	this->head_tail->next->prev->next = this->head_tail->next;
 	this->head_tail->next = _List.head_tail->next;
@@ -138,6 +151,19 @@ void List::insertFront(List * _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an den Anfang der Liste (this) übertragen ohne sie zu kopieren!
 */
+
+	if (_List->head_tail->next == _List->head_tail)
+	{
+		return;
+	};
+
+	this->head_tail->next->prev = _List->head_tail->prev;
+	this->head_tail->next->prev->next = this->head_tail->next;
+	this->head_tail->next = _List->head_tail->next;
+	this->head_tail->next->prev = this->head_tail;
+	_List->head_tail->next = _List->head_tail;
+	_List->head_tail->prev = _List->head_tail;
+	this->list_size = this->list_size + _List->list_size;
 	
 }
 
@@ -182,6 +208,11 @@ void List::insertBack(List & _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an das Ende der Liste (this) angehangen ohne sie zu kopieren!
 */
+	if (_List.head_tail->next == _List.head_tail)
+	{
+		return;
+	};
+
 	this->head_tail->prev->next = _List.head_tail->next;			//Letzter Knoten aus der aktuellen Liste wird genutzt und der next Pointer auf den ersten Knoten der _List gesetzt
 	this->head_tail->prev->next->prev = this->head_tail->prev;		//Der Erste angehängte Knoten der neuen _List wird im Prev Pointer auf den Letzten Knoten der aktuellen Liste umgesetzt.
 	this->head_tail->prev = _List.head_tail->prev;					//der Prev pointer von head_teil wird auf den letzten Knoten der angefügten Liste gesetzt.
@@ -190,6 +221,7 @@ void List::insertBack(List & _List)
 	_List.head_tail->next = _List.head_tail;						//headteil zeigt auf sich selbst.
 	_List.head_tail->prev = _List.head_tail;
 	this->list_size = this->list_size + _List.list_size;
+
 }
 
 void List::insertBack(List * _List)
@@ -204,6 +236,19 @@ void List::insertBack(List * _List)
 	Es wird ein Objekt übergeben in dem Knoten vorhanden sein können.
 	Diese Knoten (koplette Kette) werden an das Ende der Liste (this) angehangen ohne sie zu kopieren!
 */
+	if (_List->head_tail->next == _List->head_tail)
+	{
+		return;
+	};
+
+	this->head_tail->prev->next = _List->head_tail->next;			//Letzter Knoten aus der aktuellen Liste wird genutzt und der next Pointer auf den ersten Knoten der _List gesetzt
+	this->head_tail->prev->next->prev = this->head_tail->prev;		//Der Erste angehängte Knoten der neuen _List wird im Prev Pointer auf den Letzten Knoten der aktuellen Liste umgesetzt.
+	this->head_tail->prev = _List->head_tail->prev;					//der Prev pointer von head_teil wird auf den letzten Knoten der angefügten Liste gesetzt.
+	//this->head_tail->prev->next = this->head_tail;					
+	_List->head_tail->prev->next = this->head_tail;					//im letzte Knoten der angefügten liste wir der next pointer auf head_teil der aktuellen Liste gesetzt.
+	_List->head_tail->next = _List->head_tail;						//headteil zeigt auf sich selbst.
+	_List->head_tail->prev = _List->head_tail;
+	this->list_size = this->list_size + _List->list_size;
 }
 
 bool List::getFront(int & key)

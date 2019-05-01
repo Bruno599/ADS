@@ -55,7 +55,14 @@ int main(void)
 
 	cout << MyList3;
 
-	/*List Mylist4;
+	if (MyList3.test())
+		cout << "MyList3: Zeiger OK\n\n";
+	else
+		cout << "MyList3: Zeiger ******Error\n\n";
+	
+	//Überprüfe swap
+
+	List Mylist4;
 	Mylist4.insertFront(5);
 	Mylist4.insertFront(7);
 	Mylist4.insertFront(9);
@@ -71,13 +78,74 @@ int main(void)
 		Mylist4.swap(4, 5);
 
 		cout << Mylist4;
-
-	*/
-	if (MyList3.test())
-		cout << "MyList3: Zeiger OK\n\n";
-	else
-		cout << "MyList3: Zeiger ******Error\n\n";
 	
+		cout << endl << "// ueberfruefe ob pointer richtig gesetzt werden bei methode insert front und insert back" << endl <<endl;
+
+	// Überfrüfe ob pointer richtig gesetzt werden bei methode insert front und insert back
+	int number1 = 0;
+	int number2 = 0;
+	List * MyList5 = new List;
+	MyList5->getFront(number1);
+	MyList5->getBack(number2);
+
+	cout << number1 << endl;
+	cout << number2 << endl;
+
+	MyList5->insertFront(5);
+	MyList5->getBack(number1);
+
+	cout << MyList5;
+	cout << number1 << endl;
+
+	
+	MyList5->insertBack(8);
+	MyList5->insertFront(9);
+	MyList5->getFront(number2);
+
+	cout << MyList5;
+	cout << number2 << endl;
+
+	//delete MyList5;
+
+	List * MyList7 = new List;
+
+	MyList7->insertBack(3);
+	MyList7->insertBack(2);
+	MyList7->insertBack(4);
+	MyList7->insertBack(1);
+
+	cout << MyList7 << endl;
+
+	cout << endl << "// ueberpruefe was passiert wenn Liste mit 1 Knoten angefügt wird." << endl << endl;
+
+	// Überprüfe was passiert wenn Liste mit 1 Knoten angefügt wird.
+	MyList7->insertBack(MyList5);
+
+	cout << MyList7 << endl;
+
+	cout << MyList5 << endl;
+
+	cout << endl << "//Ueberpruefe was passiert wenn leere List eingefügt wird" << endl << endl;
+	//Überprüfe was passiert wenn leere List eingefügt wird
+	MyList7->insertFront(MyList5);
+
+	cout << MyList7 << endl;
+
+	cout << endl <<"//ueberpruefe ob Loeschen von leerer Liste funktioniert" << endl << endl;
+
+	//Überprüfe ob Löschen von leerer Liste funktioniert
+
+	delete MyList5;
+
+	
+
+	//List MyList6;
+	//MyList6
+
+	//cout << MyList5;
+
+
+
 	system("PAUSE");
 	return 0;
 }
