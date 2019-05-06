@@ -1,9 +1,8 @@
-/*
+/*************************************************
 * ADS Praktikum 2.2
 * main.cpp
 *
-*/
-
+*************************************************/
 #define CATCH_CONFIG_RUNNER
 #include <iostream>
 #include "Tree.h"
@@ -33,49 +32,32 @@ void newInput(Tree& tree)
 	std::cout << "+ Ihr Datensatz wurde eingefuegt\n\n";
 }
 
-void readCSV(Tree* tree)
+void readCSV(Tree& tree)
 {
-	char yesNo;
-	std::cout << "+ Moechten Sie die Datei \"Export Zielanalyse.csv\" importieren? (j/n) ?> " << std::endl;
-	std::cin >> yesNo;
 
-	if (yesNo == 'j') {
-
-		
-	std::ifstream file("./ExportZielanalyse.csv");
-
-	std::string line;
-	std::string str[4];
-
-	//name;age;income;plz
-
-	while (std::getline(file, line)) {
-		int j = 0;
-		int last = -1;
-		for (int i = 0; i < line.size(); i++) {
-			if (line.at(i) == ';') {
-				str[j] = line.substr(last + 1, i - last - 1);
-
-				j++;
-				last = i;
+	char input = 0;
+	std::string data[4];
+	std::cout << "+ Moechten Sie die Daten aus der Datei \"ExportZielanalyse.csv\"importieren (j/n) ?> ";
+	std::cin >> input;
+	if (input == 'j') {
+		int counter = 0;
+		std::ifstream csvread;
+		csvread.open("ExportZielanalyse.csv", std::ios::in);
+		if (csvread) {
+			//Datei bis Ende einlesen und bei ; an neue Pos im Array schreiben...
+			while (!csvread.eof()) {
+				for (int i = 0; i < 3; ++i) {
+					std::getline(csvread, data[i], ';');
+				}
+				std::getline(csvread, data[3], '\n');
+				tree.addNode(data[0], std::stoi(data[1]), std::stod(data[2]), std::stoi(data[3]));
 			}
 		}
-		str[j] = line.substr(last + 1, line.size() - last - 1);
 
-		tree->addNode(str[0], std::stoi(str[1]), std::stod(str[2]), std::stoi(str[3]));
 	}
-
-	std::cout << "+ Daten wurden dem Baum hinzugefuegt." << std::endl << std::endl;
-	
-	}
-	else if (yesNo == 'n') {
-		
-	}
-	else {
-		std::cout << "+ Ungeueltige Eingabe, bitte versuchen Sie es erneut." << std::endl << std::endl;
-		
-	}
+	std::cout << "\n";
 }
+
 void deleteData(Tree& tree)
 {
 	std::cin.ignore();
@@ -95,8 +77,6 @@ void searchName(Tree& tree)
 	tree.searchNode(name);
 }
 
-
-
 //
 ///////////////////////////////////////
 int main() {
@@ -105,23 +85,6 @@ int main() {
 
 	///////////////////////////////////////
 	// Ihr Code hier:
-	/*
-	Tree test;
-	test.addNode("test1", 23, 2300, 41844);
-	test.addNode("test4", 26, 2300, 41844);
-	test.addNode("test2", 24, 2300, 41844);
-	test.addNode("test3", 25, 2300, 41844);
-	test.addNode("test4", 26, 2355, 41844);
-	test.addNode("test5", 27, 2300, 41844);
-	test.addNode("test4", 28, 2300, 41844);
-
-	test.searchNode("test4");
-	test.searchNode("test5");
-	test.deleteNode(44171);
-	test.searchNode("test4");
-	test.searchNode("test5");
-	*/
-
 	char input = 0;
 	Tree myTree{};
 	std::cout << "===================================\nPerson Analyzer v19.84, by George Orwell\n";
@@ -133,7 +96,7 @@ int main() {
 			newInput(myTree);
 		}
 		else if (input == '2') {
-			readCSV(&myTree);
+			readCSV(myTree);
 		}
 		else if (input == '3') {
 			deleteData(myTree);
@@ -151,12 +114,6 @@ int main() {
 			std::cout << "Keine gueltige Eingabe.\n\n";
 		}
 	}
-	//
-	///////////////////////////////////////
-	system("PAUSE");
-
-	return 0;
-
 	//
 	///////////////////////////////////////
 	system("PAUSE");

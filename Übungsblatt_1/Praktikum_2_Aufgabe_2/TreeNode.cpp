@@ -1,4 +1,5 @@
 #include "TreeNode.h"
+#include <iomanip>
 
 TreeNode::TreeNode(int posID, int nodeID, std::string name, int alter, double einkommen, int plz)
 {
@@ -68,5 +69,5 @@ void TreeNode::setRight(TreeNode* newright)
 };
 void TreeNode::print()
 {
-	std::cout << "NodeID: " << NodeID << ", Name: " << Name << ", Alter: " << Alter << ", Einkommen: " << Einkommen << ", PLZ: " << PLZ << ", PosID: " << NodePosID << std::endl;
+	std::cout << std::setw(3) << NodeID << "|" << std::setw(12) << Name << "|" << std::setw(7) << Alter << "|" << std::setw(11) << Einkommen << "|" << std::setw(7) << PLZ << "|" << std::setw(6) << NodePosID << "\n";
 };

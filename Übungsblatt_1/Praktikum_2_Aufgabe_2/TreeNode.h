@@ -34,5 +34,7 @@ public:
 	TreeNode* getRight();
 	void setRight(TreeNode* newright);
 	void print();
+
+	
 	
 };
