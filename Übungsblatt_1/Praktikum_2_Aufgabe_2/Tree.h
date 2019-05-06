@@ -15,7 +15,10 @@ public:
 	void deleteNode(int NPID);
 	bool searchNode(std::string N);
 	void printall();
-	int NodePosCalc(int A, int E, int P);
+	int NodePosCalc(int A, double E, int P);
+	bool Preorder(TreeNode* start, std::string Suchwort);
+	TreeNode* searchNode(int NPID);
+	TreeNode* TreeSuccessor(TreeNode* ziel);
 
 
 

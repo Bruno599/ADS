@@ -68,5 +68,5 @@ void TreeNode::setRight(TreeNode* newright)
 };
 void TreeNode::print()
 {
-
+	std::cout << "NodeID: " << NodeID << ", Name: " << Name << ", Alter: " << Alter << ", Einkommen: " << Einkommen << ", PLZ: " << PLZ << ", PosID: " << NodePosID << std::endl;
 };
