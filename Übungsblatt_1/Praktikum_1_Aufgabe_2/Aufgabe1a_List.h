@@ -134,7 +134,8 @@ List<T>::~List()
 	//delete this->head_tail;
 	head_tail->next = head_tail;
 	head_tail->prev = head_tail;
-	//delete tmp;
+	delete head_tail;
+	head_tail = nullptr;
 
 }
 
