@@ -1,4 +1,6 @@
 #include "Tree.h"
+#include <iomanip>
+
 
 Tree::Tree()
 {
@@ -9,9 +11,10 @@ Tree::Tree()
 void Tree::addNode(std::string N, int A, double E, int plz)
 {
 	int position = CalcPosID(A, plz, E);
-	TreeNode * newNode = new TreeNode(position, ++NodeIDCounter, N, A, E, plz);
+	TreeNode * newNode = new TreeNode(position, NodeIDCounter, N, A, E, plz);
 	newNode->setLeft(nullptr);
 	newNode->setRight(nullptr);
+	NodeIDCounter++;
 
 	if (anker == nullptr)
 	{
@@ -36,11 +39,12 @@ void Tree::addNode(std::string N, int A, double E, int plz)
 void Tree::deleteNode(int NPID)
 {
 	if (anker == nullptr) return;
-	if ( anker->getNodePosID() == NPID)
+	/*if ( anker->getNodePosID() == NPID)
 	{
 		anker = nullptr;
 		return;
 	}
+	*/
 
 	TreeNode* Node;
 	TreeNode* ParentNode;
@@ -48,7 +52,11 @@ void Tree::deleteNode(int NPID)
 	
 	if (Node->getLeft() == nullptr && Node->getRight() == nullptr)
 	{
-		if (ParentNode->getNodePosID() > Node->getNodePosID())
+		if (Node == this->anker)
+		{
+			this->anker = nullptr;
+		}
+		else if (ParentNode->getNodePosID() > Node->getNodePosID())
 		{
 			ParentNode->setLeft(nullptr);
 		}
@@ -56,13 +64,18 @@ void Tree::deleteNode(int NPID)
 		{
 			ParentNode->setRight(nullptr);
 		}
-		delete Node;
+		//delete Node;
+		Node = nullptr;
 		return;
 	}
 
 	if (Node->getLeft() != nullptr && Node->getRight() == nullptr)
 	{
-		if (ParentNode->getNodePosID() > Node->getNodePosID())
+		if (Node == anker)
+		{
+			anker = Node->getLeft();
+		}
+		else if (ParentNode->getNodePosID() > Node->getNodePosID())
 		{
 			ParentNode->setLeft(Node->getLeft());
 		}
@@ -70,13 +83,18 @@ void Tree::deleteNode(int NPID)
 		{
 			ParentNode->setRight(Node->getLeft());
 		}
-		delete Node;
+		//delete Node;
+		Node = nullptr;
 		return;
 	}
 
 	if (Node->getLeft() == nullptr && Node->getRight() != nullptr)
 	{
-		if (ParentNode->getNodePosID() > Node->getNodePosID())
+		if (anker == nullptr)
+		{
+			anker = Node->getRight();
+		}
+		else if (ParentNode->getNodePosID() > Node->getNodePosID())
 		{
 			ParentNode->setLeft(Node->getRight());
 		}
@@ -84,7 +102,9 @@ void Tree::deleteNode(int NPID)
 		{
 			ParentNode->setRight(Node->getRight());
 		}
-		delete Node;
+		//delete Node;
+		Node = nullptr;
+		
 		return;
 	}
 
@@ -94,6 +114,37 @@ void Tree::deleteNode(int NPID)
 		TreeNode* Parentminnoderight = Node;
 		getTBMin(Node->getRight(), minnoderight, Parentminnoderight);
 
+		//Min des RBT entnehmen
+		if (Parentminnoderight == Node)
+		{
+			Parentminnoderight->setRight(minnoderight->getRight());
+		}
+		else
+		{
+			Parentminnoderight->setLeft(minnoderight->getRight());
+		}
+
+		//Min an die Stelle des zu löschenden
+		minnoderight->setLeft(Node->getLeft());
+		minnoderight->setRight(Node->getRight());
+
+		//prev von Node muss auf "minNode" zeigen
+		if (anker == Node)
+		{
+			anker = minnoderight;
+		}
+		else
+		{
+			if (ParentNode->getNodePosID() < minnoderight->getNodePosID())
+			{
+				ParentNode->setRight(minnoderight);
+			}
+			else
+			{
+				ParentNode->setLeft(minnoderight);
+			}
+		}
+		/*
 		if (Node == anker)
 		{
 			anker = minnoderight;
@@ -122,7 +173,10 @@ void Tree::deleteNode(int NPID)
 		}
 		minnoderight->setRight(Node->getRight());
 		minnoderight->setLeft(Node->getLeft());
-		delete Node;
+		*/
+		//delete Node;
+		Node == nullptr;
+		
 		return;
 	}
 };
@@ -158,6 +212,9 @@ bool Tree::searchNode(std::string N)
 };
 void Tree::printAll()
 {
+	std::cout << std::setw(4) << "ID |" << std::setw(13) << "Name |" << std::setw(8) << "Alter |" << std::setw(12) << "Einkommen |"
+		<< std::setw(8) << "PLZ |" << std::setw(7) << "Pos\n";
+	std::cout << "---+------------+-------+-----------+-------+-------\n";
 	Preorder(this->anker);
 };
 void Tree::Preorder(TreeNode*tmp)
@@ -187,6 +244,11 @@ void Tree::searchNodePos(int ID, TreeNode* &pos, TreeNode* &Ppos)
 	TreeNode* tmp = anker;
 	while (true)
 	{
+		if (anker->getNodePosID() == ID)
+		{
+			Ppos = anker;
+			pos = anker;
+		}
 		if (tmp->getNodePosID() != ID)
 		{
 			Ppos = tmp;
