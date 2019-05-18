@@ -6,7 +6,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <iostream>
 #include "Tree.h"
-#include "catch.h"
+//#include "catch.h"
 #include <fstream>
 
 using namespace std;
@@ -126,7 +126,7 @@ void searchName(Tree& tree)
 ///////////////////////////////////////
 int main() {
 
-	int result = Catch::Session().run();
+	//int result = Catch::Session().run();
 
 	///////////////////////////////////////
 	// Ihr Code hier:

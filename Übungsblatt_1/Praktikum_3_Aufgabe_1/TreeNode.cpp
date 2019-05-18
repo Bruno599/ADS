@@ -5,6 +5,7 @@ TreeNode::TreeNode(int posID, int nodeID, std::string name, int alter, double ei
 {
 	NodePosID = posID;
 	NodeID = nodeID;
+	red= true;
 	Name = name;
 	Alter = alter;
 	Einkommen = einkommen;
@@ -18,6 +19,14 @@ int TreeNode::getNodeID()
 {
 	return NodeID;
 };
+bool TreeNode::getRed()
+{
+	return red;
+}
+void TreeNode::setRed(bool value)
+{
+	red = value;
+}
 std::string TreeNode::getName()
 {
 	return Name;

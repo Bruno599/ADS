@@ -12,7 +12,7 @@ private:
 public:
 	Tree();
 	void addNode(std::string N, int A, double E, int plz);
-	void deleteNode(int NPID);
+	
 	bool searchNode(std::string N);
 	void printAll();
 

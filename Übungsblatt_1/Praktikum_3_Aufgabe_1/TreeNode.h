@@ -7,6 +7,7 @@ class TreeNode
 private:
 	int NodePosID;
 	int NodeID;
+	bool red;
 	std::string Name;
 	int Alter;
 	double Einkommen;
@@ -20,6 +21,8 @@ public:
 		int alter, double einkommen, int plz);
 	int getNodePosID();
 	int getNodeID();
+	bool getRed();
+	void setRed(bool value);
 	std::string getName();
 	void setName(std::string name);
 	int getAlter();
