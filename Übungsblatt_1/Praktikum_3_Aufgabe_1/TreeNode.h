@@ -38,6 +38,8 @@ public:
 	void setRight(TreeNode* newright);
 	void print();
 
+	
+
 
 
 };

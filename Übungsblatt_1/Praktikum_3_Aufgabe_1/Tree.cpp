@@ -25,6 +25,13 @@ void Tree::addNode(std::string N, int A, double E, int plz)
 		TreeNode* hinterKnoten;
 		searchnewNodePos(position, hinterKnoten);
 
+		if (hinterKnoten->getRed() == true)
+		{
+			hinterKnoten->setRed(false);
+		}
+
+
+
 		if (position < hinterKnoten->getNodePosID())
 		{
 			hinterKnoten->setLeft(newNode);
@@ -157,20 +164,57 @@ int Tree::CalcPosID(int alter, int plz, double einkommen)
 	return alter + plz + einkommen;
 }
 
-void Tree::balanceTree()
+bool Tree::balanceTree(TreeNode* node)
 {
-	TreeNode* Node = anker;
-
-	while(Node)
-	if (Node->getLeft()->getRed() == false && Node->getLeft()->getRed() == false)
+	while (node->getLeft() != nullptr || node->getRight() != nullptr)
 	{
-		
-	}
-	else
-	{
+		if (node->getLeft()->getRed() == 1 && node->getLeft()->getLeft()->getRed() == 1)        //rechtstrotation
+		{
+			rotateTreeRight(node, node->getLeft());
+		}
 
+		else if (node->getRight()->getRed() == 1 && node->getRight()->getRight()->getRed() == 1)  //Linksrotation
+		{
+			rotateTreeLeft(node, node->getRight());
+		}
+
+		else if (node->getLeft()->getRed() == 1 && node->getLeft()->getRight()->getRed() == 1)    //Links-, Rechtsrotation
+		{
+			rotateTreeLeft(node, node->getRight());
+			rotateTreeRight(node, node->getLeft());
+		}
+
+		else if (node->getRight()->getRed() == 1 && node->getRight()->getLeft()->getRed() == 1)    //Rechts-, Linksrotation
+		{
+			rotateTreeRight(node, node->getLeft());
+			rotateTreeLeft(node, node->getRight());
+		}
+
+		balanceTree(node->getLeft());
+		balanceTree(node->getRight());
 	}
 }
+/*
+void Tree::balanceTree(TreeNode* Node)
+{
+	
+
+	while (Node->getLeft() != nullptr || Node->getRight() != nullptr)
+	{
+		if (Node->getLeft()->getRed() == false && Node->getLeft()->getRed() == false)
+		{
+
+		}
+		else
+		{
+
+		}
+
+		balanceTree(Node->getLeft());
+		balanceTree(Node->getRight());
+	}
+}
+*/
 
 void Tree::printLevelOrder()
 {
@@ -184,9 +228,11 @@ bool Tree::rotateTreeRight(TreeNode* parent, TreeNode* child)
 	TreeNode* p1 = child;
 	TreeNode* p2;
 
-	pp->setLeft = p1->getRight;
+	p2 = p1->getLeft();
 
-	p1->setRight = pp;
+	p1->setLeft(p2->getRight());
+
+	p2->setRight(p1);
 
 	if (pp->getNodePosID() > p2->getNodePosID())
 	{
@@ -204,17 +250,97 @@ bool Tree::rotateTreeLeft(TreeNode* parent, TreeNode* child)
 	TreeNode* p1 = child;
 	TreeNode* p2;
 
-	pp->setRight = p1->getLeft;
+	p2 = p1->getRight();
 
-	p1->setRight = pp;
+	//pp->setRight(p1->getLeft());
+
+	p1->setRight(p2->getLeft());
+
+	p2->setLeft(p1);
+
+	//pp->setLeft(p2);
 
 	if(pp->getNodePosID() > p2->getNodePosID())
 	{ 
-		pp->setLeft = p2; 
+		pp->setLeft(p2);
 	}
 	else
 	{
-		pp->setRight = p2; 
+		pp->setRight(p2);
+	}
+
+}
+
+bool Tree::rotateTreeRightLeft(TreeNode* parent, TreeNode* child)
+{
+	TreeNode* pp = parent;
+	TreeNode* p1 = child;
+	TreeNode* p2;
+	TreeNode* p3;
+
+	//Rechtrotation P3 P2
+
+	p3 = p2->getLeft();
+
+	p2->setLeft(p3->getRight());
+
+	p3->setRight(p2);
+
+	//Linksrotation P2 P1
+
+	p2 = p1->getRight();
+
+	//pp->setRight(p1->getLeft());
+
+	p1->setRight(p2->getLeft());
+
+	p2->setLeft(p1);
+
+	//pp->setLeft(p2);
+
+	if (pp->getNodePosID() > p2->getNodePosID())
+	{
+		pp->setLeft(p2);
+	}
+	else
+	{
+		pp->setRight(p2);
+	}
+
+}
+
+bool Tree::rotateTreeLeftRight(TreeNode* parent, TreeNode* child)
+{
+	TreeNode* pp = parent;
+	TreeNode* p1 = child;
+	TreeNode* p2;
+	TreeNode* p3;
+
+	//Linksrotation P3 P2
+
+	p3 = p2->getRight();
+
+	p2->setRight(p3->getLeft());
+
+	p3->setLeft(p2);
+
+	//Rechtrotation P2 P1
+
+	p2 = p1->getLeft();
+
+	p1->setLeft(p2->getRight());
+
+	p2->setRight(p1);
+
+	//pp->setLeft(p2);
+
+	if (pp->getNodePosID() > p2->getNodePosID())
+	{
+		pp->setLeft(p2);
+	}
+	else
+	{
+		pp->setRight(p2);
 	}
 
 }

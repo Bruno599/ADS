@@ -9,6 +9,9 @@ private:
 	TreeNode* anker;
 	int NodeIDCounter;
 
+	bool rotateTreeRight(TreeNode* parent, TreeNode* child);
+	bool rotateTreeLeft(TreeNode* parent, TreeNode* child);
+
 public:
 	Tree();
 	void addNode(std::string N, int A, double E, int plz);
@@ -23,4 +26,7 @@ public:
 	void Preorder(TreeNode*tmp, std::string N, bool &V);
 	friend TreeNode * get_anker(Tree& Tr);
 	void getTBMin(TreeNode * tmp, TreeNode* &min, TreeNode* &Pmin);
+
+	bool balanceTree(TreeNode* node);
+
 };
