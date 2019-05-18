@@ -23,7 +23,7 @@ void Tree::addNode(std::string N, int A, double E, int plz)
 	else
 	{
 		TreeNode* hinterKnoten;
-		searchnewNodePos(position, *&hinterKnoten);
+		searchnewNodePos(position, hinterKnoten);
 
 		if (position < hinterKnoten->getNodePosID())
 		{
@@ -84,8 +84,8 @@ void Tree::deleteNode(int NPID)
 			ParentNode->setRight(Node->getLeft());
 		}
 		//delete Node;
-		Node = nullptr;
-		return;
+		//Node = nullptr;
+		//return;
 	}
 
 	if (Node->getLeft() == nullptr && Node->getRight() != nullptr)
@@ -174,7 +174,7 @@ void Tree::deleteNode(int NPID)
 		minnoderight->setRight(Node->getRight());
 		minnoderight->setLeft(Node->getLeft());
 		*/
-		//delete Node;
+		delete Node;
 		Node == nullptr;
 		
 		return;

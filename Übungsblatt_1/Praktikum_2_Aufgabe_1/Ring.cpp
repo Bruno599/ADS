@@ -74,6 +74,7 @@ bool Ring::search(std::string data, RingNode* &position)
 		{
 			tmp = tmp->getNext();
 		}
+
 	}
 	return false;
 };
@@ -173,13 +174,17 @@ void Ring::searchforBackup()
 	std::cout << "+Nach Datensatz suchen" << std::endl << "+Nach welchen Daten soll gesucht werden ? ";
 	std::cin.ignore(1, '\n');
 	std::getline(std::cin, data);
-	RingNode *tmp;
-
-	if (search(data, tmp)) 
+	RingNode *tmp = anker;
+	
+	do
 	{
-		std::cout << "+ Gefunden in Backup : ";
-		printentry(tmp);
-	}
+		if (tmp->getData() == data)
+		{
+			std::cout << "+ Gefunden in Backup : ";
+			printentry(tmp);
+		}
+		tmp = tmp->getNext();
+	} while (tmp->getAge() != 0);
 
 	std::cout << std::endl;
 	printauswahl();
