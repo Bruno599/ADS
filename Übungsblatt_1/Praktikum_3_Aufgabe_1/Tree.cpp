@@ -159,18 +159,62 @@ int Tree::CalcPosID(int alter, int plz, double einkommen)
 
 void Tree::balanceTree()
 {
-	if ()
+	TreeNode* Node = anker;
+
+	while(Node)
+	if (Node->getLeft()->getRed() == false && Node->getLeft()->getRed() == false)
+	{
+		
+	}
+	else
+	{
+
+	}
 }
 
-int Tree::rotateRight()
+void Tree::printLevelOrder()
 {
-	TreeNode* pp;
-	TreeNode* p1;
+
+
+}
+
+bool Tree::rotateTreeRight(TreeNode* parent, TreeNode* child)
+{
+	TreeNode* pp = parent;
+	TreeNode* p1 = child;
 	TreeNode* p2;
 
 	pp->setLeft = p1->getRight;
 
 	p1->setRight = pp;
 
+	if (pp->getNodePosID() > p2->getNodePosID())
+	{
+		pp->setLeft = p2;
+	}
+	else
+	{
+		pp->setRight = p2;
+	}
+}
+
+bool Tree::rotateTreeLeft(TreeNode* parent, TreeNode* child)
+{
+	TreeNode* pp = parent;
+	TreeNode* p1 = child;
+	TreeNode* p2;
+
+	pp->setRight = p1->getLeft;
+
+	p1->setRight = pp;
+
+	if(pp->getNodePosID() > p2->getNodePosID())
+	{ 
+		pp->setLeft = p2; 
+	}
+	else
+	{
+		pp->setRight = p2; 
+	}
 
 }
