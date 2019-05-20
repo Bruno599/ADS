@@ -118,8 +118,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
+    <ClCompile Include="TreeTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="catch.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>

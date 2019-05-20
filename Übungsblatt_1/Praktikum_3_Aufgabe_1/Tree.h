@@ -29,5 +29,8 @@ public:
 	void getTBMin(TreeNode * tmp, TreeNode* &min, TreeNode* &Pmin);
 
 	bool balanceTree(TreeNode* node);
+	int heigh(TreeNode* node);
+	void printGivenLevel(TreeNode* node, int level);
+	void printLevelOrder(TreeNode* node);
 
 };

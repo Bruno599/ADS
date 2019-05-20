@@ -19,19 +19,14 @@ void Tree::addNode(std::string N, int A, double E, int plz)
 	if (anker == nullptr)
 	{
 		anker = newNode;
+		anker->setRed(false);
 	}
 	else
 	{
+		TreeNode* PhinterKnoten;
 		TreeNode* hinterKnoten;
 		searchnewNodePos(position, hinterKnoten);
-
-		
-		if (hinterKnoten->getRed() == true)
-		{
-			newNode->setRed(false);
-		}
-
-
+		searchnewNodePos(hinterKnoten->getNodePosID(), PhinterKnoten);
 
 		if (position < hinterKnoten->getNodePosID())
 		{
@@ -42,6 +37,60 @@ void Tree::addNode(std::string N, int A, double E, int plz)
 		{
 			hinterKnoten->setRight(newNode);
 		}
+
+		if (hinterKnoten == anker)
+		{
+			return;
+		}
+
+		/*
+		if (hinterKnoten->getRed())
+		{
+			hinterKnoten->setRed(false);
+		}
+		*/
+
+		if (PhinterKnoten->getLeft() == hinterKnoten)
+		{
+			if (PhinterKnoten->getRight() == nullptr || PhinterKnoten->getRight()->getRed() == false)
+			{
+				if (hinterKnoten->getRight() == newNode)
+				{
+					rotateTreeLeft(hinterKnoten, newNode);
+					rotateTreeRight(PhinterKnoten, hinterKnoten);
+				}
+				else
+				{
+					rotateTreeRight(PhinterKnoten, hinterKnoten);
+				}
+			}
+			else
+			{
+				PhinterKnoten->getRight()->setRed(false);
+			}
+		}
+		else
+		{
+			if (PhinterKnoten->getLeft() == nullptr || PhinterKnoten->getLeft()->getRed() == false)
+			{
+				if (hinterKnoten->getRight() == newNode)
+				{
+					rotateTreeLeft(PhinterKnoten, hinterKnoten);
+
+				}
+				else
+				{
+					rotateTreeRight(hinterKnoten, newNode);
+					rotateTreeLeft(PhinterKnoten, hinterKnoten);
+				}
+			}
+			else
+			{
+				PhinterKnoten->getLeft()->setRed(false);
+			}
+		}
+		//balanceTree(PhinterKnoten);
+		balanceTree(anker);
 
 	}
 };
@@ -168,6 +217,47 @@ int Tree::CalcPosID(int alter, int plz, double einkommen)
 
 bool Tree::balanceTree(TreeNode* node)
 {
+	if (node != nullptr)
+	{
+		if (node->getRed())
+		{
+			if (node->getLeft() != nullptr && node->getLeft()->getRed())
+			{
+				if (node->getLeft()->getLeft() != nullptr && node->getLeft()->getLeft()->getRed())      //Rechtsrotation
+				{
+					rotateTreeRight(node, node->getLeft());
+				}
+
+				else if (node->getLeft()->getRight() != nullptr && node->getLeft()->getRight()->getRed())  //Links-, Rechtsrotation
+				{
+					rotateTreeLeft(node, node->getRight());
+					rotateTreeRight(node, node->getLeft());
+				}
+			}
+
+			else if (node->getRight() != nullptr && node->getRight()->getRed())
+			{
+				if (node->getRight()->getRight() != nullptr && node->getRight()->getRight()->getRed())    //Linksrotation
+				{
+					rotateTreeLeft(node, node->getRight());
+				}
+
+				else if (node->getRight()->getLeft() != nullptr && node->getRight()->getLeft()->getRed())  //Rechts-, Linksrotation
+				{
+					rotateTreeRight(node, node->getLeft());
+					rotateTreeLeft(node, node->getRight());
+				}
+			}
+
+			balanceTree(node->getLeft());
+			balanceTree(node->getRight());
+		}
+	}
+
+	return true;
+}
+/*bool Tree::balanceTree(TreeNode* node)
+{
 	while (node->getLeft() != nullptr || node->getRight() != nullptr)
 	{
 		if (node->getLeft()->getRed() == 1 && node->getLeft()->getLeft()->getRed() == 1)        //rechtstrotation
@@ -196,6 +286,7 @@ bool Tree::balanceTree(TreeNode* node)
 		balanceTree(node->getLeft());
 		balanceTree(node->getRight());
 	}
+	return true;
 }
 /*
 void Tree::balanceTree(TreeNode* Node)
@@ -219,12 +310,76 @@ void Tree::balanceTree(TreeNode* Node)
 }
 */
 
-void Tree::printLevelOrder()
+
+void Tree::printLevelOrder(TreeNode* node)
+{
+	std::cout << std::setw(4) << "ID |" << std::setw(13) << "Name |" << std::setw(8) << "Alter |" << std::setw(12) << "Einkommen |"
+		<< std::setw(8) << "PLZ |" << std::setw(7) << "Pos\n";
+	std::cout << "---+------------+-------+-----------+-------+-------\n";
+
+	int h = heigh(node);
+	int i;
+
+	for (i = 1; i <= h; i++)
+	{
+		printGivenLevel(node, i);
+	}
+}
+
+//Hilfsfunktionen
+int Tree::heigh(TreeNode* node)
+{
+	if (node == nullptr)
+	{
+		return 0;
+	}
+
+	else if (node == anker)
+	{
+		return 1;
+	}
+
+	else
+	{
+		int lheigh = heigh(node->getLeft());
+		int rheigh = heigh(node->getRight());
+
+		if (lheigh > rheigh)
+		{
+			return lheigh + 1;
+		}
+
+		else
+		{
+			return rheigh + 1;
+		}
+	}
+}
+
+void Tree::printGivenLevel(TreeNode* node, int level)
+{
+	if (node == nullptr)
+	{
+		return;
+	}
+
+	if (level == 1)
+	{
+		node->print();
+	}
+
+	else if (level > 1)
+	{
+		printGivenLevel(node->getLeft(), level - 1);
+		printGivenLevel(node->getRight(), level - 1);
+	}
+}
+/*void Tree::printLevelOrder()
 {
 
 
 }
-
+*/
 bool Tree::rotateTreeRight(TreeNode* parent, TreeNode* child)
 {
 	TreeNode* pp = parent;
@@ -239,12 +394,14 @@ bool Tree::rotateTreeRight(TreeNode* parent, TreeNode* child)
 
 	if (pp->getNodePosID() > p2->getNodePosID())
 	{
-		pp->setLeft = p2;
+		pp->setLeft(p2);
 	}
 	else
 	{
-		pp->setRight = p2;
+		pp->setRight(p2);
 	}
+
+	return true;
 }
 
 bool Tree::rotateTreeLeft(TreeNode* parent, TreeNode* child)
@@ -272,8 +429,13 @@ bool Tree::rotateTreeLeft(TreeNode* parent, TreeNode* child)
 		pp->setRight(p2);
 	}
 
+
+
+	return true;
+
 }
 
+/*
 bool Tree::rotateTreeRightLeft(TreeNode* parent, TreeNode* child)
 {
 	TreeNode* pp = parent;
@@ -347,3 +509,4 @@ bool Tree::rotateTreeLeftRight(TreeNode* parent, TreeNode* child)
 	}
 
 }
+*/

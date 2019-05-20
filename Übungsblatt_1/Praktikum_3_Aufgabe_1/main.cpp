@@ -6,7 +6,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <iostream>
 #include "Tree.h"
-//#include "catch.h"
+#include "catch.h"
 #include <fstream>
 
 using namespace std;
@@ -103,7 +103,7 @@ void readCSV(Tree* tree)
 }
 */
 
-void deleteData(Tree& tree)
+/*void deleteData(Tree& tree)
 {
 	std::cin.ignore();
 	int nodePosID = 0;
@@ -112,6 +112,7 @@ void deleteData(Tree& tree)
 	tree.deleteNode(nodePosID);
 	std::cout << "\n";
 }
+*/
 
 void searchName(Tree& tree)
 {
@@ -126,7 +127,7 @@ void searchName(Tree& tree)
 ///////////////////////////////////////
 int main() {
 
-	//int result = Catch::Session().run();
+	int result = Catch::Session().run();
 
 	///////////////////////////////////////
 	// Ihr Code hier:
@@ -143,9 +144,9 @@ int main() {
 		else if (input == '2') {
 			readCSV(&myTree);
 		}
-		else if (input == '3') {
-			deleteData(myTree);
-		}
+		//else if (input == '3') {
+		//	deleteData(myTree);
+		//}
 		else if (input == '4') {
 			searchName(myTree);
 		}
