@@ -12,6 +12,7 @@ private:
 	bool rotateTreeRight(TreeNode* parent, TreeNode* child);
 	bool rotateTreeLeft(TreeNode* parent, TreeNode* child);
 
+
 public:
 	Tree();
 	void addNode(std::string N, int A, double E, int plz);

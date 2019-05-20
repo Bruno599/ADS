@@ -25,15 +25,17 @@ void Tree::addNode(std::string N, int A, double E, int plz)
 		TreeNode* hinterKnoten;
 		searchnewNodePos(position, hinterKnoten);
 
+		
 		if (hinterKnoten->getRed() == true)
 		{
-			hinterKnoten->setRed(false);
+			newNode->setRed(false);
 		}
 
 
 
 		if (position < hinterKnoten->getNodePosID())
 		{
+
 			hinterKnoten->setLeft(newNode);
 		}
 		else
@@ -180,13 +182,14 @@ bool Tree::balanceTree(TreeNode* node)
 
 		else if (node->getLeft()->getRed() == 1 && node->getLeft()->getRight()->getRed() == 1)    //Links-, Rechtsrotation
 		{
-			rotateTreeLeft(node, node->getRight());
+			rotateTreeLeft(node->getLeft(), node->getLeft()->getRight());
 			rotateTreeRight(node, node->getLeft());
+			
 		}
 
 		else if (node->getRight()->getRed() == 1 && node->getRight()->getLeft()->getRed() == 1)    //Rechts-, Linksrotation
 		{
-			rotateTreeRight(node, node->getLeft());
+			rotateTreeRight(node->getRight(), node->getRight()->getLeft());
 			rotateTreeLeft(node, node->getRight());
 		}
 
