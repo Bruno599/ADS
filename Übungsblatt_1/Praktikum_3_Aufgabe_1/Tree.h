@@ -28,9 +28,11 @@ public:
 	friend TreeNode * get_anker(Tree& Tr);
 	void getTBMin(TreeNode * tmp, TreeNode* &min, TreeNode* &Pmin);
 
+	void printLevelOrder();
+
 	bool balanceTree(TreeNode* node);
-	int heigh(TreeNode* node);
-	void printGivenLevel(TreeNode* node, int level);
-	void printLevelOrder(TreeNode* node);
+	//int heigh(TreeNode* node);
+	//void printGivenLevel(TreeNode* node, int level);
+	//void printLevelOrder(TreeNode* node);
 
 };

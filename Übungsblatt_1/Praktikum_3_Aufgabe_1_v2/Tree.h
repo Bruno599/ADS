@@ -30,7 +30,7 @@ public:
 	// Ihr Code hier:	
 	Tree();
 	void addNode(std::string name, int age, double income, int plz);
-	void deleteNode(int nodePosID);
+	//void deleteNode(int nodePosID);
 	bool searchNode(std::string name);
 	void printAll();
 	bool balanceTreeRek(TreeNode* prevPrev, TreeNode* prev, TreeNode* node, bool left);

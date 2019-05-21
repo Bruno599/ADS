@@ -103,7 +103,7 @@ void readCSV(Tree* tree)
 }
 */
 
-void deleteData(Tree& tree)
+/*void deleteData(Tree& tree)
 {
 	std::cin.ignore();
 	int nodePosID = 0;
@@ -112,7 +112,7 @@ void deleteData(Tree& tree)
 	tree.deleteNode(nodePosID);
 	std::cout << "\n";
 }
-
+*/
 void searchName(Tree& tree)
 {
 	std::cin.ignore();
@@ -142,10 +142,10 @@ int main() {
 		}
 		else if (input == '2') {
 			readCSV(&myTree);
-		}
+		}/*
 		else if (input == '3') {
 			deleteData(myTree);
-		}
+		}*/
 		else if (input == '4') {
 			searchName(myTree);
 		}
