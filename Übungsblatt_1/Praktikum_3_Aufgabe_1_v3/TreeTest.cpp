@@ -6,7 +6,7 @@
 *************************************************
 * Änderungen untersagt!
 *************************************************/
-#include "catch.h"
+#include "catch.hpp"
 #include "Tree.h"
 #include "TreeNode.h"
 #include <string>
@@ -221,7 +221,7 @@ TEST_CASE("Tree Testing", "[TREE]" ) {
 			// Random Einkommen und PLZ
 			double r = rand()+1;
 			int plz = rand() + 1;
-			nTree->addNode(info, 0, r/10, plz);
+			nTree->addNode(info, 0, r, plz);
 		}
 		nTree->printAll();
 		std::cout << "========================================" << endl;

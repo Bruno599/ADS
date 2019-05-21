@@ -4,7 +4,7 @@
 * Stand: 05.03.2019
 *
 *************************************************
-* Änderungen untersagt!
+* Aenderungen untersagt!
 *************************************************/
 #include "catch.h"
 #include "Tree.h"
@@ -22,7 +22,7 @@ TreeNode * get_anker(Tree& Tr) {
 /***********************************************
  * Testroutine des Baums:
  *  - Einfaches Hinzufuegen und Suchen
- *  - Loeschen in unterscheidlicher Ausprägung
+ *  - Loeschen in unterscheidlicher Auspraegung
  *  + Loeschen ohne Nachfolger
  *  + Loeschen mit einem Nachfolger
  *  + Loeschen mit zwei Nachfolger
@@ -221,7 +221,7 @@ TEST_CASE("Tree Testing", "[TREE]" ) {
 			// Random Einkommen und PLZ
 			double r = rand()+1;
 			int plz = rand() + 1;
-			nTree->addNode(info, 0, r/10, plz);
+			nTree->addNode(info, 0, r, plz);
 		}
 		nTree->printAll();
 		std::cout << "========================================" << endl;
@@ -231,7 +231,7 @@ TEST_CASE("Tree Testing", "[TREE]" ) {
 
 /***********************************************
  * Testroutine des Knotens:
- *  - Einfaches pruefen der Getter und Setter in Ausführung 
+ *  - Einfaches pruefen der Getter und Setter in Ausfuehrung
  */
 TEST_CASE("TreeNode Testing", "[TREENODE]" ) {
 		
@@ -242,8 +242,8 @@ TEST_CASE("TreeNode Testing", "[TREENODE]" ) {
 	SECTION("Getter von TreeNode - simple") {
 
 		REQUIRE(ref->getName() == "Scholl");
-		REQUIRE(ref->getAlter() == 20);
-		REQUIRE(ref->getEinkommen() == 0);
+		REQUIRE(ref->getAge() == 20);
+		REQUIRE(ref->getIncome() == 0);
 		REQUIRE(ref->getLeft() == nullptr);
 		REQUIRE(ref->getRight() == nullptr);
 		REQUIRE(ref->getNodeID() == 0);
@@ -253,11 +253,11 @@ TEST_CASE("TreeNode Testing", "[TREENODE]" ) {
 
 	SECTION("Setter von TreeNode - simple") {
 		
-		ref->setAlter(22);
-		REQUIRE(ref->getAlter() == 22);
+		ref->setAge(22);
+		REQUIRE(ref->getAge() == 22);
 
-		ref->setEinkommen(1000);
-		REQUIRE(ref->getEinkommen() == 1000);
+		ref->setIncome(1000);
+		REQUIRE(ref->getIncome() == 1000);
 		
 		ref->setLeft(nullptr);
 		REQUIRE(ref->getLeft() == nullptr);
