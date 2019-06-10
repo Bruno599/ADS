@@ -22,9 +22,9 @@ int main(int argc, char** argv) {
   std::cin.get();
 
 
-  //benchmark_quicksort();
-  //benchmark_heapsort();
-  //benchmark_shellsort();
+  benchmark_quicksort();
+  benchmark_heapsort();
+  benchmark_shellsort();
   benchmark_mergesort();
 
   HashTable hashTable(1000);
