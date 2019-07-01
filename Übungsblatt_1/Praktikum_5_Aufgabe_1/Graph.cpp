@@ -48,13 +48,14 @@ bool Graph::init(std::string path)
 bool Graph::printAll() 
 {
 	
+	
 	for (int i = 0; i < _anzKnoten; i++)
 	{
-		std::cout << _nodes.at(i)->getKey();
+		std::cout << _nodes.at(i)->getKey() << std::setfill(' ');
 
 		for (int j = 0; j < _nodes.at(i)->getNumberOfEdges(); j++)
 		{
-			std::cout << " -> " << _nodes.at(i)->getEdge(j)->secondNode->getKey() << " [" <<_nodes.at(i)->getEdge(j)->gewicht << "] ";
+			std::cout << std::setfill(' ') << std::setw(6) << " -> " << _nodes.at(i)->getEdge(j)->secondNode->getKey() << " [" <<_nodes.at(i)->getEdge(j)->gewicht << "] " ;
 		}
 		std::cout << std::endl;
 	}

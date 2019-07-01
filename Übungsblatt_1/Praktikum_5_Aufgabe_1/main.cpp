@@ -8,17 +8,20 @@ int main()
 {
 	Catch::Session().run();
 
-	/*Graph G;
+	Graph G;
 	G.init("graph1.txt");
 
-	G.printAll();*/
+	G.printAll();
 
+	system("pause");
+/*
 	int auswahl;
 	bool graphloaded = false;
 	bool exit = true;
 	string file;
 	Graph G;
 
+	
 	while(exit)
 	{
 			cout << "\nWorking on Graphs. Please choose:" << endl;
@@ -83,13 +86,13 @@ int main()
 
 				if (G.depthSearchRek(startknoten))
 				{
-					cout << "\n Breitensuche war erfolgreich, alle Nodes wurden gefunden\n\n";
+					cout << "\nTiefensuche war erfolgreich, alle Nodes wurden gefunden\n\n";
 
 					system("pause");
 				}
 				else
 				{
-					cout << "\n Breitensuche war nicht erfolgreich, nicht alle Nodes wurden gefunden\n\n";
+					cout << "\n Tiefensuche war nicht erfolgreich, nicht alle Nodes wurden gefunden\n\n";
 
 					system("pause");
 				}
@@ -217,6 +220,6 @@ int main()
 		
 		}
 	}
-
+	*/
 	return 0;
 }
