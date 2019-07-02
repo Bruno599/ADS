@@ -22,16 +22,16 @@ int main(int argc, char** argv) {
   std::cin.get();
 
 
-  benchmark_quicksort();
-  benchmark_heapsort();
-  benchmark_shellsort();
-  benchmark_mergesort();
+  //benchmark_quicksort();
+  //benchmark_heapsort();
+  //benchmark_shellsort();
+  //benchmark_mergesort();
 
   HashTable hashTable(1000);
 
   for (int i = 0; i < 200; i++)
   {
-	  hashTable.insert(rand() % 1500 + 1000);
+	  hashTable.insert(rand() % 1500 - 1000);
   }
 
   cout << "Collision Count: " << hashTable.getCollisionCount() << endl;
@@ -63,7 +63,7 @@ void benchmark_quicksort() {
   for (int n = n_start; n<=n_end; n += n_step) {
 	
 	//"progress bar"
-    std::cout << "Running Quicksort with n: " << n << std::endl;
+    //std::cout << "Running Quicksort with n: " << n << std::endl;
 
 	//generate n random integers
 	sorting::randomizeVector(V, n);
@@ -103,7 +103,7 @@ void benchmark_heapsort() {
 	for (int n = n_start; n <= n_end; n += n_step) {
 
 		//"progress bar"
-		std::cout << "Running Heapsort with n: " << n << std::endl;
+		//std::cout << "Running Heapsort with n: " << n << std::endl;
 
 		//generate n random integers
 		sorting::randomizeVector(V, n);
@@ -144,7 +144,7 @@ void benchmark_mergesort() {
 	for (int n = n_start; n <= n_end; n += n_step) {
 
 		//"progress bar"
-		std::cout << "Running Mergesort with n: " << n << std::endl;
+		//std::cout << "Running Mergesort with n: " << n << std::endl;
 
 		//generate n random integers
 		sorting::randomizeVector(V, n);
@@ -187,7 +187,7 @@ void benchmark_shellsort() {
 	for (int n = n_start; n <= n_end; n += n_step) {
 
 		//"progress bar"
-		std::cout << "Running Shellsort with n: " << n << std::endl;
+		//std::cout << "Running Shellsort with n: " << n << std::endl;
 
 		//generate n random integers
 		sorting::randomizeVector(V, n);
