@@ -8,13 +8,16 @@ int main()
 {
 	Catch::Session().run();
 
+	/*
 	Graph G;
 	G.init("graph1.txt");
 
 	G.printAll();
 
 	system("pause");
-/*
+
+	*/
+
 	int auswahl;
 	bool graphloaded = false;
 	bool exit = true;
@@ -220,6 +223,6 @@ int main()
 		
 		}
 	}
-	*/
+	
 	return 0;
 }
